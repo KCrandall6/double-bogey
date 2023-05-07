@@ -45,11 +45,22 @@ function NavBar() {
               </Navbar.Collapse>
             </Container>
           </Navbar>
-          <Navbar fixed="bottom" bg="light" variant="light" className="navbar-bottom">
+          <Navbar
+            fixed="bottom"
+            bg="light"
+            variant="light"
+            className="custom-navbar-bottom" // Add custom class name
+          >
             <Nav className="navbar-options">
-              <NavLink href="/courseOverview" className="navbar-option">Courses</NavLink>
-              <NavLink href="/game" className="navbar-option">Game</NavLink>
-              <NavLink href="/topScores" className="navbar-option">Top Scores</NavLink>
+              <NavLink href="/courseOverview" className="navbar-option">
+                Courses
+              </NavLink>
+              <NavLink href="/game" className="navbar-option">
+                Game
+              </NavLink>
+              <NavLink href="/topScores" className="navbar-option">
+                Top Scores
+              </NavLink>
             </Nav>
           </Navbar>
         </>
