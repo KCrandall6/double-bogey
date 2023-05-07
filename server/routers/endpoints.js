@@ -32,4 +32,10 @@ router.get('/myProfile', (req, res) => {
     .sendFile(path.resolve(__dirname, '../../build/index.html'));
 });
 
+router.get('/share', (req, res) => {
+  return res
+    .status(200)
+    .sendFile(path.resolve(__dirname, '../../build/index.html'));
+});
+
 module.exports = router;

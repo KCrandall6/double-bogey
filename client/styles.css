@@ -1,0 +1,38 @@
+body {
+  background-color: #F0EBCE;
+}
+
+.nav-link-spacing {
+  margin-top: 10px;
+  margin-right: 30px;
+  margin-left: 30px;
+}
+
+.navbar-bottom {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  height: 60px; /* Adjust the height as needed */
+  background-color: lightgray; /* Add your desired background color */
+}
+
+.navbar-options {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  font-size: large;
+}
+
+.navbar-options a {
+  flex: 1;
+  text-align: center;
+  padding: 10px;
+  border-right: 1px solid gray;
+}
+
+.navbar-options a:last-child {
+  border-right: none;
+}
+
