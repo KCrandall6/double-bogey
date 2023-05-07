@@ -15,7 +15,12 @@ module.exports = {
     new MiniCssExtractPlugin(),
     new HtmlWebpackPlugin({ template: './dev.html' }),
     new CopyWebpackPlugin({
-      patterns: [{ from: 'public/manifest.json', to: 'manifest.json' }],
+      patterns: [
+        { from: 'public/manifest.json', to: 'manifest.json' },
+        { from: 'public/favicon.ico', to: 'favicon.ico' },
+        { from: 'public/logo192.png', to: 'logo192.png' },
+        { from: 'public/logo512.png', to: 'logo512.png' },
+      ],
     }),
     new Dotenv(),
   ],
