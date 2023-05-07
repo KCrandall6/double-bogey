@@ -1,5 +1,6 @@
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const CopyWebpackPlugin = require('copy-webpack-plugin');
 const path = require('path');
 const Dotenv = require('dotenv-webpack');
 
@@ -13,6 +14,9 @@ module.exports = {
   plugins: [
     new MiniCssExtractPlugin(),
     new HtmlWebpackPlugin({ template: './dev.html' }),
+    new CopyWebpackPlugin({
+      patterns: [{ from: 'public/manifest.json', to: 'manifest.json' }],
+    }),
     new Dotenv(),
   ],
   module: {
