@@ -1,3 +1,11 @@
+# build
+build/*.js
+build/*.html
+build/*.css
+build/*.txt
+
+.env
+
 # Logs
 logs
 *.log
