@@ -1,10 +1,14 @@
+import 'bootstrap/dist/css/bootstrap.min.css';
+import './styles.css'
 import React from 'react';
+
+import Main from './Main';
 
 const App = () => {
 
   return (
     <div>
-      <h1>Here we are, double bogey 123</h1>
+      <Main/>
     </div>
   )
 };
