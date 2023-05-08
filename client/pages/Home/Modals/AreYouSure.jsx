@@ -4,7 +4,7 @@
 import React, { useState } from 'react';
 import {Button, Modal, Form} from 'react-bootstrap';
 
-const AreYouSure = ({show, setShow, handleClose, handleShow, confirmModal, addPlayer, deleteLastPlayer}) => {
+const AreYouSure = ({show, setShow, handleClose, handleShow, confirmModal, addPlayer, deleteLastPlayer, restartNewGame}) => {
 
   const [playerName, setPlayerName] = useState('');
 
@@ -60,6 +60,27 @@ const AreYouSure = ({show, setShow, handleClose, handleShow, confirmModal, addPl
             </Button>
             <Button size="lg" style={{ color:"white", backgroundColor: "#AA5656", border: "none"}} onClick={() => deleteLastPlayer()}>
               Delete Player
+            </Button>
+          </Modal.Footer>
+        </Modal>
+      </>
+    );
+  } else if (confirmModal === 'new game') {
+    return (
+      <>
+        <Modal show={show} onHide={handleClose}>
+          <Modal.Header closeButton>
+            <Modal.Title>Start a New Game</Modal.Title>
+          </Modal.Header>
+          <Modal.Body className="text-center">
+            Are you sure you want start a new game without saving?
+          </Modal.Body>
+          <Modal.Footer className="d-flex justify-content-center">
+            <Button size="lg" variant="secondary" onClick={handleClose}>
+              Close
+            </Button>
+            <Button size="lg" style={{ color:"white", backgroundColor: "#4E6C50", border: "none"}} onClick={() => restartNewGame()}>
+              Start a New Game
             </Button>
           </Modal.Footer>
         </Modal>

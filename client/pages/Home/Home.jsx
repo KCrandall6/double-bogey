@@ -18,7 +18,7 @@ const Home = () => {
   // check if a game is already in progress
   useEffect(() => {
     const currentCard = JSON.parse(localStorage.getItem('scoreCard'))
-    if (currentCard.length > 0) {
+    if (currentCard.length) {
       if (currentCard[0][1]) {
         // STILL NEED to write logic to then update the scoreCard variable with the scores if it exists
         setExistingGame(true);
@@ -45,7 +45,7 @@ const Home = () => {
     <>
       {existingGame ? (
         <div>
-          <Scorecard course={course} setCourse={setCourse} scorecard={scorecard} setScorecard={setScorecard}/>
+          <Scorecard course={course} setCourse={setCourse} scorecard={scorecard} setScorecard={setScorecard} setExistingGame={setExistingGame}/>
         </div>
       ) : (
         <div className='d-flex justify-content-center mt-5 pt-5'>

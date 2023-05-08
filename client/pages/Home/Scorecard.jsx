@@ -3,7 +3,7 @@ import {Table, Row, Col, Button, Modal} from 'react-bootstrap';
 
 import AreYouSure from './Modals/AreYouSure';
 
-const Scorecard = ({course, setCourse, scorecard, setScorecard}) => {
+const Scorecard = ({course, setCourse, scorecard, setScorecard, setExistingGame}) => {
 
   const today = useState(new Date(new Date().setHours(0, 0, 0)));
   const [player, setPlayer] = useState({
@@ -67,6 +67,11 @@ const Scorecard = ({course, setCourse, scorecard, setScorecard}) => {
       return updatedScorecard;
     });
   };
+
+  const restartNewGame = () => {
+    setScorecard([]);
+    setExistingGame(false);
+  }
   
 
   console.log('scorecard', scorecard)
@@ -89,16 +94,20 @@ const Scorecard = ({course, setCourse, scorecard, setScorecard}) => {
               <th className="tees-toggle" onClick={handleTeesToggle}>
                 {activeTees} <span className="triangle"></span>
               </th>
-              {/* Render tees based on the activeTees value */}
-              {activeTees === 'White Tees' ? (
-                JSON.parse(course.whiteTees).map((el) => (
-                  <th key={el}>{el}</th>
-                ))
-              ) : (
-                JSON.parse(course.redTees).map((el) => (
-                  <th key={el}>{el}</th>
-                ))
-              )}
+                {/* Render tees based on the activeTees value */}
+                {activeTees === 'White Tees' ? (
+                  JSON.parse(course.whiteTees).map((el) => (
+                    <th key={el}>{el}</th>
+                  ))
+                ) : activeTees === 'Red Tees' ? (
+                  JSON.parse(course.redTees).map((el) => (
+                    <th key={el}>{el}</th>
+                  ))
+                ) : (
+                  JSON.parse(course.blackTees).map((el) => (
+                    <th key={el}>{el}</th>
+                  ))
+                )}
             </tr>
             <tr>
               <th>Par</th>
@@ -125,7 +134,7 @@ const Scorecard = ({course, setCourse, scorecard, setScorecard}) => {
                 <Button className="ms-4" size="sm" style={{ color: "white", backgroundColor: "#AA5656", border: "none" }} onClick={() => confirmationModal('delete player')}>
                   - Delete Player
                 </Button>
-                  <AreYouSure show={show} setShow={setShow} handleClose={handleClose} handleShow={handleShow} confirmModal={confirmModal} addPlayer={addPlayer} deleteLastPlayer={deleteLastPlayer}/>
+                  <AreYouSure show={show} setShow={setShow} handleClose={handleClose} handleShow={handleShow} confirmModal={confirmModal} addPlayer={addPlayer} deleteLastPlayer={deleteLastPlayer} restartNewGame={restartNewGame}/>
               </div>
             </td>
           </tr>
@@ -136,7 +145,7 @@ const Scorecard = ({course, setCourse, scorecard, setScorecard}) => {
         <Button size="lg" style={{ color:"white", backgroundColor: "#395144", border: "none"}}>
           Save Game
         </Button>
-        <Button className="m-3" size="sm" style={{ color:"white", backgroundColor: "#4E6C50", border: "none"}}>
+        <Button className="m-3" size="sm" style={{ color:"white", backgroundColor: "#4E6C50", border: "none"}} onClick={() => confirmationModal('new game')}>
           New Game
         </Button>
       </div>
