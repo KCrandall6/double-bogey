@@ -37,13 +37,19 @@ const Scorecard = ({course, setCourse, scorecard, setScorecard, setExistingGame}
   const handleShow = () => setShow(true);
 
   const handleTeesToggle = () => {
-    if (activeTees === 'White Tees') {
-      setActiveTees('Red Tees');
-    } else if (activeTees === 'Red Tees') {
-      setActiveTees('Black Tees');
-    } else {
-      setActiveTees('White Tees');
+    const options = [];
+    if (JSON.parse(course.blackTees).length > 0) {
+      options.push('Black Tees');
     }
+    if (JSON.parse(course.whiteTees).length > 0) {
+      options.push('White Tees');
+    }
+    if (JSON.parse(course.redTees).length > 0) {
+      options.push('Red Tees');
+    }
+    const currentIndex = options.findIndex((option) => option === activeTees);
+    const nextIndex = (currentIndex + 1) % options.length;
+    setActiveTees(options[nextIndex]);
   };
 
   const confirmationModal = (confirm) => {
@@ -75,11 +81,13 @@ const Scorecard = ({course, setCourse, scorecard, setScorecard, setExistingGame}
   
 
   console.log('scorecard', scorecard)
+  console.log('course black', JSON.parse(course.blackTees).length)
+  console.log('course red', JSON.parse(course.redTees)[0])
 
   return (
     <>
       <div className="mt-3 ms-1 me-1 text-center" style={{backgroundColor: "white"}}>
-        <h2>{course.courseName}</h2>
+        <h2 className='pt-2 course-name'>{course.courseName}</h2>
         <Table striped="columns" bordered hover responsive>
           <thead>
             <tr>
@@ -91,23 +99,23 @@ const Scorecard = ({course, setCourse, scorecard, setScorecard, setExistingGame}
           </thead>
           <tbody>
           <tr>
-              <th className="tees-toggle" onClick={handleTeesToggle}>
-                {activeTees} <span className="triangle"></span>
-              </th>
-                {/* Render tees based on the activeTees value */}
-                {activeTees === 'White Tees' ? (
-                  JSON.parse(course.whiteTees).map((el) => (
-                    <th key={el}>{el}</th>
-                  ))
-                ) : activeTees === 'Red Tees' ? (
-                  JSON.parse(course.redTees).map((el) => (
-                    <th key={el}>{el}</th>
-                  ))
-                ) : (
-                  JSON.parse(course.blackTees).map((el) => (
-                    <th key={el}>{el}</th>
-                  ))
-                )}
+          <th className="tees-toggle" onClick={handleTeesToggle}>
+              {activeTees} <span className="triangle"></span>
+            </th>
+            {/* Render tees based on the activeTees value */}
+            {activeTees === 'White Tees' && JSON.parse(course.whiteTees).length > 0 ? (
+              JSON.parse(course.whiteTees).map((el) => (
+                <th key={el}>{el}</th>
+              ))
+            ) : activeTees === 'Red Tees' && JSON.parse(course.redTees).length > 0 ? (
+              JSON.parse(course.redTees).map((el) => (
+                <th key={el}>{el}</th>
+              ))
+            ) : activeTees === 'Black Tees' && JSON.parse(course.blackTees).length > 0 ? (
+              JSON.parse(course.blackTees).map((el) => (
+                <th key={el}>{el}</th>
+              ))
+            ) : null}
             </tr>
             <tr>
               <th>Par</th>
