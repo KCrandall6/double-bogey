@@ -29,14 +29,14 @@ function NavBar() {
       {isMobile ? (
         /* Mobile View */
         <>
-          <Navbar bg="light" variant="light" expand="lg" collapseOnSelect expanded={showMobileMenu}>
-            <Container fluid>
+          <Navbar bg="light" variant="light" style={{border: '1px'}} expand="lg" collapseOnSelect expanded={showMobileMenu}>
+            <Container fluid fixed="top">
               <NavbarBrand href="/" className="ml-3 mr-auto">
                 <img alt="double bogey logo" src={navlogo} height="40" />
               </NavbarBrand>
               <Navbar.Toggle aria-controls="mobile-navbar" onClick={toggleMobileMenu} className="mr-3" />
               <Navbar.Collapse id="mobile-navbar">
-                <Nav className="text-center">
+                <Nav className="text-center dropdown-options">
                   <NavItem>
                     <NavLink href="/myprofile">My Profile</NavLink>
                     <NavLink href="/share">Share</NavLink>
@@ -55,8 +55,8 @@ function NavBar() {
               <NavLink href="/courseOverview" className="navbar-option">
                 Courses
               </NavLink>
-              <NavLink href="/game" className="navbar-option">
-                Game
+              <NavLink href="/" className="navbar-option">
+                <b>Game</b>
               </NavLink>
               <NavLink href="/topScores" className="navbar-option">
                 Top Scores
@@ -82,7 +82,7 @@ function NavBar() {
               <Row>
                 <Nav className="justify-content-center fs-4">
                   <NavLink className="nav-link-spacing" href="/">Home</NavLink>
-                  <NavLink className="nav-link-spacing" href="/game">Game</NavLink>
+                  <NavLink className="nav-link-spacing" href="/">Game</NavLink>
                   <NavLink className="nav-link-spacing" href="/courseOverview">Courses</NavLink>
                   <NavLink className="nav-link-spacing" href="/topScores">Top Scores</NavLink>
                   <NavLink className="nav-link-spacing" href="/myprofile">My Profile</NavLink>

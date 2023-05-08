@@ -17,13 +17,18 @@ body {
   font-size: 22px;
 }
 
+.dropdown-options {
+  font-size: 22px;
+}
+
 .navbar-options a {
+  color: #395144;
   display: flex;
   justify-content: center;
   align-items: center;
   flex: 1;
   text-align: center;
-  border-right: 1px solid gray;
+  border-right: 1px solid #395144;
   height: 100%;
 }
 
