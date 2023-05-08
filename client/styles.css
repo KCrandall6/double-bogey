@@ -39,3 +39,23 @@ body {
 .custom-navbar-bottom {
   height: 100px;
 }
+
+.tees-toggle {
+  position: relative;
+  cursor: pointer;
+  font-size: 12px;
+  padding-right: 20px;
+}
+
+.triangle {
+  position: absolute;
+  transform: rotate(315deg);
+  right: 1px; /* Adjust the position of the triangle */
+  top: -1px; /* Adjust the position of the triangle */
+  width: 0;
+  height: 0;
+  border-top: 5px solid transparent;
+  border-bottom: 5px solid transparent;
+  border-left: 5px solid black; /* Change the color of the triangle */
+}
+

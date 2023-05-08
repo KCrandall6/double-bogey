@@ -12,7 +12,7 @@ const Home = () => {
     whiteTees: [],
     redTees: []
   });
-  const [scoreCard, setScoreCard] = useState([]);
+  const [scorecard, setScorecard] = useState([]);
   const [show, setShow] = useState(false);
 
   // check if a game is already in progress
@@ -20,17 +20,23 @@ const Home = () => {
     const currentCard = JSON.parse(localStorage.getItem('scoreCard'))
     if (currentCard.length > 0) {
       if (currentCard[0][1]) {
+        // STILL NEED to write logic to then update the scoreCard variable with the scores if it exists
         setExistingGame(true);
       }
     }
   }, []);
 
-  const startNewGame = (selectedCourse) => {
-    localStorage.setItem('course', selectedCourse);
-    localStorage.setItem('scoreCard', JSON.stringify(scoreCard));
-    setExistingGame(true);
-    handleClose();
-  }
+  const startNewGame = async (selectedCourse) => {
+    await fetch(`http://localhost:3000/getCourseInfo?course=${selectedCourse}`)
+      .then((res) => res.json())
+      .then((res) => {
+        setCourse(res[0]);
+        //Come back to this; do I need to setItem in localStorage here, or is it unneccesary?
+        localStorage.setItem('scoreCard', JSON.stringify(scorecard));
+        setExistingGame(true);
+        handleClose();
+      });
+  };  
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
@@ -39,7 +45,7 @@ const Home = () => {
     <>
       {existingGame ? (
         <div>
-          <Scorecard course={course} setCourse={setCourse} scoreCard={scoreCard} setScoreCard={setScoreCard}/>
+          <Scorecard course={course} setCourse={setCourse} scorecard={scorecard} setScorecard={setScorecard}/>
         </div>
       ) : (
         <div className='d-flex justify-content-center mt-5 pt-5'>

@@ -1,5 +1,3 @@
-//course controller
-
 const db = require('../models/doublebogeyModel');
 
 const courseController = {};
