@@ -78,11 +78,6 @@ const Scorecard = ({course, setCourse, scorecard, setScorecard, setExistingGame}
     setScorecard([]);
     setExistingGame(false);
   }
-  
-
-  console.log('scorecard', scorecard)
-  console.log('course black', JSON.parse(course.blackTees).length)
-  console.log('course red', JSON.parse(course.redTees)[0])
 
   return (
     <>
