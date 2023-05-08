@@ -17,14 +17,14 @@ const Home = () => {
 
   // check if a game is already in progress
   useEffect(() => {
-    const currentCard = JSON.parse(localStorage.getItem('scoreCard'))
-    console.log('curcard', currentCard)
-    if (currentCard.length) {
-      if (currentCard[0][1]) {
-        // STILL NEED to write logic to then update the scoreCard variable with the scores if it exists
-        setExistingGame(true);
-      }
-    }
+    // const currentCard = JSON.parse(localStorage.getItem('scoreCard'))
+    // console.log('curcard', currentCard)
+    // if (currentCard.length) {
+    //   if (currentCard[0][1] > 0) {
+    //     // STILL NEED to write logic to then update the scoreCard variable with the scores if it exists
+    //     setExistingGame(true);
+    //   }
+    // }
   }, []);
 
   const startNewGame = async (selectedCourse) => {
