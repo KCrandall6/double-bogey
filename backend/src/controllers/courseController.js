@@ -10,6 +10,8 @@ courseController.getCourseInfo = (req, res, next) => {
   db.query(searchQuery)
     .then((data) => {
       res.locals.courseInformation = data.rows;
+      //possibly need to change to this below
+      // console.log('data', data.fields)
       return next();
     })
     .catch((err) => {
