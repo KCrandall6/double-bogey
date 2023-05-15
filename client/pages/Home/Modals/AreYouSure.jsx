@@ -87,7 +87,6 @@ const AreYouSure = ({show, setShow, handleClose, handleShow, confirmModal, addPl
       </>
     );
   }
-  
 }
 
 export default AreYouSure;
