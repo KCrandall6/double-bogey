@@ -45,4 +45,13 @@ router.get('/getCourseInfo', courseController.getCourseInfo, (req, res) =>
   res.status(200).json(res.locals.courseInformation)
 );
 
+// API TEST CONTROLLER
+
+router.get('/testAPI', (req, res) => {
+  res.json({
+    'hello': 'test from the api'
+  });
+});
+
+
 module.exports = router;
