@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from 'react';
-import {Table, Row, Col, Button, Modal} from 'react-bootstrap';
+import React, { useState } from 'react';
+import {Table, Button} from 'react-bootstrap';
 
 import AreYouSure from './Modals/AreYouSure';
 
@@ -35,6 +35,8 @@ const Scorecard = ({course, setCourse, scorecard, setScorecard, setExistingGame}
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
+
+  console.log('player', setPlayer)
 
   const handleTeesToggle = () => {
     const options = [];

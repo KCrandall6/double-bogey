@@ -1,5 +1,5 @@
-import React, { useState, useEffect, useRef } from 'react';
-import { Navbar, NavbarBrand, Nav, NavItem, NavLink, Button, Container, Row, Col } from 'react-bootstrap';
+import React, { useState, useEffect } from 'react';
+import { Navbar, NavbarBrand, Nav, NavItem, NavLink, Container, Row, Col } from 'react-bootstrap';
 
 import navlogo from './figures/DoubleBogey.png';
 
