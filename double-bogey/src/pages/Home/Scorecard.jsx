@@ -13,26 +13,28 @@ const Scorecard = ({course, scorecard, setScorecard, setExistingGame}) => {
   const addPlayer = (name) => {
     const newPlayer = {
       date: today,
-      course: '',
+      course: course.courseName,
       name: name,
-      1: null,
-      2: null,
-      3: null,
-      4: null,
-      5: null,
-      6: null,
-      7: null,
-      8: null,
-      9: null,
-      10: null,
-      11: null,
-      12: null,
-      13: null,
-      14: null,
-      15: null,
-      16: null,
-      17: null,
-      18: null,
+      scores : {
+        1: null,
+        2: null,
+        3: null,
+        4: null,
+        5: null,
+        6: null,
+        7: null,
+        8: null,
+        9: null,
+        10: null,
+        11: null,
+        12: null,
+        13: null,
+        14: null,
+        15: null,
+        16: null,
+        17: null,
+        18: null,
+      },
       total: 0
     };
     setScorecard((prevScorecard) => [...prevScorecard, newPlayer]);
@@ -74,8 +76,34 @@ const Scorecard = ({course, scorecard, setScorecard, setExistingGame}) => {
   const restartNewGame = () => {
     setScorecard([]);
     setExistingGame(false);
-  }
+  };
   
+  const scoreSum = (inputs) => {
+    inputs = JSON.parse(inputs);
+    return inputs.reduce((cur, acc) => cur + acc);
+  };
+  
+  const handleInputChange = (playerIndex, holeIndex, value) => {
+    setScorecard((prevScorecard) => {
+      const updatedScorecard = [...prevScorecard];
+      updatedScorecard[playerIndex].scores[holeIndex] = Number(value);
+  
+      // Calculate the total score for the current player
+      const player = updatedScorecard[playerIndex];
+      const scores = Object.values(player.scores);
+      const total = scoreSum(JSON.stringify(scores));
+      player.total = total;
+
+      //localStorage.setItem('scoreCard', JSON.stringify(updatedScorecard));
+  
+      return updatedScorecard;
+    });
+  };
+  
+  
+  
+
+  console.log('score', scorecard)
 
   return (
     <>
@@ -98,16 +126,16 @@ const Scorecard = ({course, scorecard, setScorecard, setExistingGame}) => {
             </th>
             {/* Render tees based on the activeTees value */}
             {activeTees === 'White Tees' && JSON.parse(course.whiteTees).length > 0 ? (
-              JSON.parse(course.whiteTees).map((el) => (
-                <th key={el}>{el}</th>
+              JSON.parse(course.whiteTees).map((el, index) => (
+                <th key={index + 1}>{el}</th>
               ))
             ) : activeTees === 'Red Tees' && JSON.parse(course.redTees).length > 0 ? (
-              JSON.parse(course.redTees).map((el) => (
-                <th key={el}>{el}</th>
+              JSON.parse(course.redTees).map((el, index) => (
+                <th key={index + 1}>{el}</th>
               ))
             ) : activeTees === 'Black Tees' && JSON.parse(course.blackTees).length > 0 ? (
-              JSON.parse(course.blackTees).map((el) => (
-                <th key={el}>{el}</th>
+              JSON.parse(course.blackTees).map((el, index) => (
+                <th key={index + 1}>{el}</th>
               ))
             ) : null}
             </tr>
@@ -116,16 +144,32 @@ const Scorecard = ({course, scorecard, setScorecard, setExistingGame}) => {
               {JSON.parse(course.pars).map((el, index) => (
                 <th key={index + 1}>{el}</th>
               ))}
-              <th>test</th>
+              <th>{scoreSum(course.pars)}</th>
             </tr>
               {/* player data */}
               {scorecard.map((player, index) => (
                 <tr key={index}>
-                  <th>{player.name}</th>
-                  {/* Render blank cells */}
+                  <th style={{fontSize: '25px'}}>{player.name}</th>
+                  {/* Render editable cells */}
                   {Array.from({ length: JSON.parse(course.pars).length }, (_, i) => (
-                    <td key={i}></td>
+                    <td key={i}>
+                      <input
+                        type="number"
+                        value={player.scores[i + 1] || ''}
+                        onChange={(e) => handleInputChange(index, i + 1, e.target.value)}
+                        style={{
+                          width: '100%',
+                          boxSizing: 'border-box',
+                          backgroundColor: 'transparent',
+                          border: 'none',
+                          textAlign: 'center',
+                          color: '#000',
+                          fontSize: '25px',
+                        }}
+                      />
+                    </td>
                   ))}
+                  <th style={{fontSize: '25px'}}>{player.total}</th>
                 </tr>
               ))}
             <tr>
@@ -144,7 +188,7 @@ const Scorecard = ({course, scorecard, setScorecard, setExistingGame}) => {
           </tbody>
         </Table>
       </div>
-      <div className='d-flex flex-column justify-content-center align-items-center m-5'>
+      <div className='d-flex flex-column justify-content-center align-items-center m-5 pb-5'>
         <Button size="lg" style={{ color:"white", backgroundColor: "#395144", border: "none" ,minWidth:"250px", maxWidth: "500px"}}>
           Save Game
         </Button>

@@ -34,7 +34,7 @@ const Home = () => {
       .then((res) => {
         setCourse(res[0]);
         //Come back to this; do I need to setItem in localStorage here, or is it unneccesary?
-        localStorage.setItem('scoreCard', JSON.stringify(scorecard));
+        // localStorage.setItem('scoreCard', JSON.stringify(scorecard));
         setExistingGame(true);
         handleClose();
       });
@@ -66,6 +66,7 @@ const Home = () => {
               <option disabled value="">select a course</option>
               <option value="Royal Palms">Royal Palms</option>
               <option value="Longbow">Longbow</option>
+              <option value="Painted Mountain">Painted Mountain</option>
             </Form.Select>
           </Form>
         </Modal.Body>
