@@ -3,40 +3,43 @@ import {Table, Button} from 'react-bootstrap';
 
 import AreYouSure from './Modals/AreYouSure';
 
-const Scorecard = ({course, setCourse, scorecard, setScorecard, setExistingGame}) => {
+const Scorecard = ({course, scorecard, setScorecard, setExistingGame}) => {
 
   const today = useState(new Date(new Date().setHours(0, 0, 0)));
-  const [player, setPlayer] = useState({
-    date: today,
-    course: '',
-    name: '',
-    1: null,
-    2: null,
-    3: null,
-    4: null,
-    5: null,
-    6: null,
-    7: null,
-    8: null,
-    9: null,
-    10: null,
-    11: null,
-    12: null,
-    13: null,
-    14: null,
-    15: null,
-    16: null,
-    17: null,
-    18: null
-  });
   const [activeTees, setActiveTees] = useState('White Tees');
   const [show, setShow] = useState(false);
-  const [confirmModal, setConfirmModal] = useState('')
+  const [confirmModal, setConfirmModal] = useState('');
+
+  const addPlayer = (name) => {
+    const newPlayer = {
+      date: today,
+      course: '',
+      name: name,
+      1: null,
+      2: null,
+      3: null,
+      4: null,
+      5: null,
+      6: null,
+      7: null,
+      8: null,
+      9: null,
+      10: null,
+      11: null,
+      12: null,
+      13: null,
+      14: null,
+      15: null,
+      16: null,
+      17: null,
+      18: null,
+      total: 0
+    };
+    setScorecard((prevScorecard) => [...prevScorecard, newPlayer]);
+  }
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
-
-  console.log('player', setPlayer)
 
   const handleTeesToggle = () => {
     const options = [];
@@ -58,14 +61,6 @@ const Scorecard = ({course, setCourse, scorecard, setScorecard, setExistingGame}
     setConfirmModal(confirm)
     handleShow();
   }
-  
-  const addPlayer = (name) => {
-    const newPlayer = {
-      ...player,
-      name: name
-    };
-    setScorecard((prevScorecard) => [...prevScorecard, newPlayer]);
-  };
 
   const deleteLastPlayer = () => {
     handleClose(); // Close the modal first
@@ -80,6 +75,7 @@ const Scorecard = ({course, setCourse, scorecard, setScorecard, setExistingGame}
     setScorecard([]);
     setExistingGame(false);
   }
+  
 
   return (
     <>
@@ -92,6 +88,7 @@ const Scorecard = ({course, setCourse, scorecard, setScorecard, setExistingGame}
               {JSON.parse(course.pars).map((_, index) => (
                 <th key={index + 1}>{index + 1}</th>
               ))}
+              <th>Total</th>
             </tr>
           </thead>
           <tbody>
@@ -119,6 +116,7 @@ const Scorecard = ({course, setCourse, scorecard, setScorecard, setExistingGame}
               {JSON.parse(course.pars).map((el, index) => (
                 <th key={index + 1}>{el}</th>
               ))}
+              <th>test</th>
             </tr>
               {/* player data */}
               {scorecard.map((player, index) => (
@@ -136,7 +134,7 @@ const Scorecard = ({course, setCourse, scorecard, setScorecard, setExistingGame}
                 <Button size="sm" style={{ color: "white", backgroundColor: "#AA9B56", border: "none" }} onClick={() => confirmationModal('add player')}>
                   + Add Player
                 </Button>
-                <Button className="ms-4" size="sm" style={{ color: "white", backgroundColor: "#AA5656", border: "none" }} onClick={() => confirmationModal('delete player')}>
+                <Button className="ms-4" size="sm" style={{ color: "white", backgroundColor: "#AA5656", border: "none" }} onClick={() => confirmationModal('delete player')} disabled={scorecard.length === 0}>
                   - Delete Player
                 </Button>
                   <AreYouSure show={show} setShow={setShow} handleClose={handleClose} handleShow={handleShow} confirmModal={confirmModal} addPlayer={addPlayer} deleteLastPlayer={deleteLastPlayer} restartNewGame={restartNewGame}/>

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Button, Form, Modal } from 'react-bootstrap';
 import Scorecard from './Scorecard';
+import { endpoint } from '../../configEndpoint';
 
 const Home = () => {
 
@@ -28,7 +29,7 @@ const Home = () => {
   }, []);
 
   const startNewGame = async (selectedCourse) => {
-    await fetch(`https://doublebogey.netlify.app/.netlify/functions/getCourseInfo?course=${selectedCourse}`)
+    await fetch(`${endpoint}/.netlify/functions/getCourseInfo?course=${selectedCourse}`)
       .then((res) => res.json())
       .then((res) => {
         setCourse(res[0]);
@@ -46,7 +47,7 @@ const Home = () => {
     <>
       {existingGame ? (
         <div>
-          <Scorecard course={course} setCourse={setCourse} scorecard={scorecard} setScorecard={setScorecard} setExistingGame={setExistingGame}/>
+          <Scorecard course={course} scorecard={scorecard} setScorecard={setScorecard} setExistingGame={setExistingGame}/>
         </div>
       ) : (
         <div className='d-flex justify-content-center mt-5 pt-5'>
