@@ -163,7 +163,7 @@ const Scorecard = ({course, scorecard, setScorecard, setExistingGame}) => {
                           textAlign: 'center',
                           color: '#000',
                           fontSize: '25px',
-                          appearance: 'textfield',
+                          padding: '0 5px',
                         }}
                       />
                     </td>
