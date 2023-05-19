@@ -180,7 +180,7 @@ const Scorecard = ({course, scorecard, setScorecard, setExistingGame}) => {
                 <Button className="ms-4" size="sm" style={{ color: "white", backgroundColor: "#AA5656", border: "none" }} onClick={() => confirmationModal('delete player')} disabled={scorecard.length === 0}>
                   - Delete Player
                 </Button>
-                  <AreYouSure show={show} setShow={setShow} handleClose={handleClose} handleShow={handleShow} confirmModal={confirmModal} addPlayer={addPlayer} deleteLastPlayer={deleteLastPlayer} restartNewGame={restartNewGame}/>
+                  <AreYouSure show={show} setShow={setShow} handleClose={handleClose} handleShow={handleShow} confirmModal={confirmModal} addPlayer={addPlayer} deleteLastPlayer={deleteLastPlayer} restartNewGame={restartNewGame} scorecard={scorecard}/>
               </div>
             </td>
           </tr>
@@ -188,7 +188,7 @@ const Scorecard = ({course, scorecard, setScorecard, setExistingGame}) => {
         </Table>
       </div>
       <div className='d-flex flex-column justify-content-center align-items-center m-5 pb-5'>
-        <Button size="lg" style={{ color:"white", backgroundColor: "#395144", border: "none" ,minWidth:"250px", maxWidth: "500px"}}>
+        <Button size="lg" style={{ color:"white", backgroundColor: "#395144", border: "none" ,minWidth:"250px", maxWidth: "500px"}} onClick={() => confirmationModal('save game')}>
           Save Game
         </Button>
         <Button className="m-3" size="sm" style={{ color:"white", backgroundColor: "#4E6C50", border: "none", minWidth:"200px", maxWidth: "500px"}} onClick={() => confirmationModal('new game')}>
