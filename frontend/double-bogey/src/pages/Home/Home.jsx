@@ -28,7 +28,7 @@ const Home = () => {
   }, []);
 
   const startNewGame = async (selectedCourse) => {
-    await fetch(`http://localhost:3000/getCourseInfo?course=${selectedCourse}`)
+    await fetch(`https://doublebogey.netlify.app/.netlify/functions/getCourseInfo?course=${selectedCourse}`)
       .then((res) => res.json())
       .then((res) => {
         setCourse(res[0]);

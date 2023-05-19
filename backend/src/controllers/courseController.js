@@ -1,4 +1,4 @@
-const db = require('../models/doublebogeyModel');
+const db = require('../../../frontend/double-bogey/doublebogeyModel');
 
 const courseController = {};
 
