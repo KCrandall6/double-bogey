@@ -93,8 +93,6 @@ const Scorecard = ({course, scorecard, setScorecard, setExistingGame}) => {
       const scores = Object.values(player.scores);
       const total = scoreSum(JSON.stringify(scores));
       player.total = total;
-
-      //localStorage.setItem('scoreCard', JSON.stringify(updatedScorecard));
   
       return updatedScorecard;
     });
@@ -165,6 +163,7 @@ const Scorecard = ({course, scorecard, setScorecard, setExistingGame}) => {
                           textAlign: 'center',
                           color: '#000',
                           fontSize: '25px',
+                          appearance: 'textfield',
                         }}
                       />
                     </td>
