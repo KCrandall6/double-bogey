@@ -67,6 +67,7 @@ const Home = () => {
               <option value="Royal Palms">Royal Palms</option>
               <option value="Longbow">Longbow</option>
               <option value="Painted Mountain">Painted Mountain</option>
+              <option value="Apache Wells">Apache Wells</option>
             </Form.Select>
           </Form>
         </Modal.Body>
