@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import {Table, Button} from 'react-bootstrap';
 
 import AreYouSure from './Modals/AreYouSure';
@@ -9,6 +9,14 @@ const Scorecard = ({course, scorecard, setScorecard, setExistingGame}) => {
   const [activeTees, setActiveTees] = useState('White Tees');
   const [show, setShow] = useState(false);
   const [confirmModal, setConfirmModal] = useState('');
+
+  useEffect(() => {
+    localStorage.setItem('scorecard', JSON.stringify(scorecard));
+    // Empty cleanup function
+  return () => {
+    // No cleanup required at the moment
+  };
+  }, [scorecard])
 
   const addPlayer = (name) => {
     const newPlayer = {
@@ -45,19 +53,20 @@ const Scorecard = ({course, scorecard, setScorecard, setExistingGame}) => {
 
   const handleTeesToggle = () => {
     const options = [];
-    if (JSON.parse(course.blackTees).length > 0) {
+    if (course.blackTees.length > 0) {
       options.push('Black Tees');
     }
-    if (JSON.parse(course.whiteTees).length > 0) {
+    if (course.whiteTees.length > 0) {
       options.push('White Tees');
     }
-    if (JSON.parse(course.redTees).length > 0) {
+    if (course.redTees.length > 0) {
       options.push('Red Tees');
     }
     const currentIndex = options.findIndex((option) => option === activeTees);
     const nextIndex = (currentIndex + 1) % options.length;
     setActiveTees(options[nextIndex]);
   };
+  
 
   const confirmationModal = (confirm) => {
     setConfirmModal(confirm)
@@ -76,11 +85,11 @@ const Scorecard = ({course, scorecard, setScorecard, setExistingGame}) => {
   const restartNewGame = () => {
     setScorecard([]);
     setExistingGame(false);
+    localStorage.clear();
   };
   
   const scoreSum = (inputs) => {
-    inputs = JSON.parse(inputs);
-    return inputs.reduce((cur, acc) => cur + acc);
+    return inputs.reduce((cur, acc) => cur + acc, 0);
   };
   
   const handleInputChange = (playerIndex, holeIndex, value) => {
@@ -91,17 +100,13 @@ const Scorecard = ({course, scorecard, setScorecard, setExistingGame}) => {
       // Calculate the total score for the current player
       const player = updatedScorecard[playerIndex];
       const scores = Object.values(player.scores);
-      const total = scoreSum(JSON.stringify(scores));
+      const total = scoreSum(scores);
       player.total = total;
   
       return updatedScorecard;
     });
   };
   
-  
-  
-
-  console.log('score', scorecard)
 
   return (
     <>
@@ -111,7 +116,7 @@ const Scorecard = ({course, scorecard, setScorecard, setExistingGame}) => {
           <thead>
             <tr>
               <th>Hole</th>
-              {JSON.parse(course.pars).map((_, index) => (
+              {course.pars.map((_, index) => (
                 <th key={index + 1}>{index + 1}</th>
               ))}
               <th>Total</th>
@@ -123,23 +128,23 @@ const Scorecard = ({course, scorecard, setScorecard, setExistingGame}) => {
               {activeTees} <span className="triangle"></span>
             </th>
             {/* Render tees based on the activeTees value */}
-            {activeTees === 'White Tees' && JSON.parse(course.whiteTees).length > 0 ? (
-              JSON.parse(course.whiteTees).map((el, index) => (
+            {activeTees === 'White Tees' && course.whiteTees.length > 0 ? (
+              course.whiteTees.map((el, index) => (
                 <th key={index + 1}>{el}</th>
               ))
-            ) : activeTees === 'Red Tees' && JSON.parse(course.redTees).length > 0 ? (
-              JSON.parse(course.redTees).map((el, index) => (
+            ) : activeTees === 'Red Tees' && course.redTees.length > 0 ? (
+              course.redTees.map((el, index) => (
                 <th key={index + 1}>{el}</th>
               ))
-            ) : activeTees === 'Black Tees' && JSON.parse(course.blackTees).length > 0 ? (
-              JSON.parse(course.blackTees).map((el, index) => (
+            ) : activeTees === 'Black Tees' && course.blackTees.length > 0 ? (
+              course.blackTees.map((el, index) => (
                 <th key={index + 1}>{el}</th>
               ))
             ) : null}
             </tr>
             <tr>
               <th>Par</th>
-              {JSON.parse(course.pars).map((el, index) => (
+              {course.pars.map((el, index) => (
                 <th key={index + 1}>{el}</th>
               ))}
               <th>{scoreSum(course.pars)}</th>
@@ -149,7 +154,7 @@ const Scorecard = ({course, scorecard, setScorecard, setExistingGame}) => {
                 <tr key={index}>
                   <th style={{fontSize: '25px'}}>{player.name}</th>
                   {/* Render editable cells */}
-                  {Array.from({ length: JSON.parse(course.pars).length }, (_, i) => (
+                  {Array.from({ length: course.pars.length }, (_, i) => (
                     <td key={i}>
                       <input
                         type="number"
@@ -172,7 +177,7 @@ const Scorecard = ({course, scorecard, setScorecard, setExistingGame}) => {
                 </tr>
               ))}
             <tr>
-            <td colSpan={JSON.parse(course.pars).length + 1}>
+            <td colSpan={course.pars.length + 1}>
               <div className="d-flex justify-content-start mt-2 mb-2 ms-1">
                 <Button size="sm" style={{ color: "white", backgroundColor: "#AA9B56", border: "none" }} onClick={() => confirmationModal('add player')}>
                   + Add Player

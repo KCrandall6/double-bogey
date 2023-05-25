@@ -18,27 +18,42 @@ const Home = () => {
 
   // check if a game is already in progress
   useEffect(() => {
-    // const currentCard = JSON.parse(localStorage.getItem('scoreCard'))
-    // console.log('curcard', currentCard)
-    // if (currentCard.length) {
-    //   if (currentCard[0][1] > 0) {
-    //     // STILL NEED to write logic to then update the scoreCard variable with the scores if it exists
-    //     setExistingGame(true);
-    //   }
-    // }
+    try {
+      const storedScorecard = localStorage.getItem('scorecard');
+      const storedCourse = localStorage.getItem('course');
+      if (storedScorecard) {
+        const parsedScorecard = JSON.parse(storedScorecard);
+        const parsedCourse = JSON.parse(storedCourse)
+        setScorecard(parsedScorecard);
+        setCourse(parsedCourse);
+        setExistingGame(true);
+      }
+    } catch (error) {
+      console.error('Error parsing scorecard data:', error);
+    }
   }, []);
+
 
   const startNewGame = async (selectedCourse) => {
     await fetch(`${endpoint}/.netlify/functions/getCourseInfo?course=${selectedCourse}`)
       .then((res) => res.json())
       .then((res) => {
-        setCourse(res[0]);
-        //Come back to this; do I need to setItem in localStorage here, or is it unneccesary?
-        // localStorage.setItem('scoreCard', JSON.stringify(scorecard));
-        setExistingGame(true);
+        const parsedCourse = {
+          ...res[0],
+          pars: JSON.parse(res[0].pars),
+          blackTees: JSON.parse(res[0].blackTees),
+          whiteTees: JSON.parse(res[0].whiteTees),
+          redTees: JSON.parse(res[0].redTees),
+        };
+        setCourse(parsedCourse);
+        localStorage.setItem('course', JSON.stringify(parsedCourse));
+        setScorecard([]); 
+        setExistingGame(true); 
         handleClose();
       });
-  };  
+  };
+  
+    
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);

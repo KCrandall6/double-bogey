@@ -49,9 +49,6 @@ const AreYouSure = ({show, setShow, handleClose, handleShow, confirmModal, addPl
       console.log('Incorrect password');
     }
   };
-  
-  
-  console.log('scorecard in modal', scorecard)
 
   if (confirmModal === 'add player') {
     return (
