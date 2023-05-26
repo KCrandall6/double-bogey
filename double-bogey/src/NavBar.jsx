@@ -39,6 +39,7 @@ function NavBar() {
                 <Nav className="text-center dropdown-options">
                   <NavItem>
                     <NavLink href="/myprofile">My Profile</NavLink>
+                    <NavLink href="/courseOverview">Coure Information</NavLink>
                     <NavLink href="/share">Share</NavLink>
                   </NavItem>
                 </Nav>
@@ -52,11 +53,11 @@ function NavBar() {
             className="custom-navbar-bottom" // Add custom class name
           >
             <Nav className="navbar-options">
-              <NavLink href="/courseOverview" className="navbar-option">
-                Courses
+              <NavLink href="/news" className="navbar-option">
+                News
               </NavLink>
               <NavLink href="/" className="navbar-option">
-                <b>Game</b>
+                <b>Scorecard</b>
               </NavLink>
               <NavLink href="/topScores" className="navbar-option">
                 Top Scores
@@ -82,7 +83,7 @@ function NavBar() {
               <Row>
                 <Nav className="justify-content-center fs-4">
                   <NavLink className="nav-link-spacing" href="/">Home</NavLink>
-                  <NavLink className="nav-link-spacing" href="/">Game</NavLink>
+                  <NavLink className="nav-link-spacing" href="/">Scorecard</NavLink>
                   <NavLink className="nav-link-spacing" href="/courseOverview">Courses</NavLink>
                   <NavLink className="nav-link-spacing" href="/topScores">Top Scores</NavLink>
                   <NavLink className="nav-link-spacing" href="/myprofile">My Profile</NavLink>

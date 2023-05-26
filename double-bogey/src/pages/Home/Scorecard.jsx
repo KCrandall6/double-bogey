@@ -194,10 +194,10 @@ const Scorecard = ({course, scorecard, setScorecard, setExistingGame}) => {
       </div>
       <div className='d-flex flex-column justify-content-center align-items-center m-5 pb-5'>
         <Button size="lg" style={{ color:"white", backgroundColor: "#395144", border: "none" ,minWidth:"250px", maxWidth: "500px"}} onClick={() => confirmationModal('save game')}>
-          Save Game
+          Save Scorecard
         </Button>
         <Button className="m-3" size="sm" style={{ color:"white", backgroundColor: "#4E6C50", border: "none", minWidth:"200px", maxWidth: "500px"}} onClick={() => confirmationModal('new game')}>
-          New Game
+          New Scorecard
         </Button>
       </div>
     </>

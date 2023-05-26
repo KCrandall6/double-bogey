@@ -67,12 +67,12 @@ const Home = () => {
       ) : (
         <div className='d-flex justify-content-center mt-5 pt-5'>
           <Button size="lg" onClick={handleShow} style={{ color:"white", backgroundColor: "#395144", border: "none"}}>
-            New Game
+            New Scorecard
           </Button>
 
           <Modal className="mt-5" show={show} onHide={handleClose}>
         <Modal.Header closeButton>
-          <Modal.Title>Create a New Game</Modal.Title>
+          <Modal.Title>Create a New Scorecard</Modal.Title>
         </Modal.Header>
         <Modal.Body>
           <Form className="text-center">

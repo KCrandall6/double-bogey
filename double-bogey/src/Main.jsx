@@ -7,6 +7,7 @@ import CourseOverview from './pages/CourseOverview/CourseOverview';
 import TopScores from './pages/TopScores/TopScores';
 import MyProfile from './pages/MyProfile/MyProfile';
 import Share from './pages/MyProfile/Share'
+import News from './pages/News/News';
 
 const Main = () => {
 
@@ -17,6 +18,7 @@ const Main = () => {
         <Route path="/" element={<Home />} />
         <Route path="/courseOverview" element={<CourseOverview />} />
         <Route path="/topScores" element={<TopScores />} />
+        <Route path="/news" element={<News />} />
         <Route path="/myprofile" element={<MyProfile />} />
         <Route path="/share" element={<Share />} />
       </Routes>
