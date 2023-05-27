@@ -7,7 +7,7 @@ const News = () => {
   // const today = new Date().toJSON();
 
   useEffect(() => {
-    fetch('http://site.api.espn.com/apis/site/v2/sports/golf/pga/news')
+    fetch('https://site.api.espn.com/apis/site/v2/sports/golf/pga/news')
     .then((res) => res.json())
     .then((res) => setArticles(res.articles))
   }, [])
@@ -21,7 +21,7 @@ const News = () => {
         return (
           <Container key={article.dataSourceIdentifier} className="d-flex align-items-center justify-content-center text-start pt-3">
             <Card border="dark">
-              <Card.Img className="pt-3 ps-3 pe-3" style={{ borderRadius: '8px' }} src={article.images[0].url} />
+              <Card.Img className="pt-3 ps-3 pe-3" src={article.images[0].url} />
               <Card.Body>
                 <Card.Title>{article.headline}</Card.Title>
                 <Card.Text>
