@@ -63,3 +63,7 @@ body {
 /* need a font for the name */
 font-family: cursive;
 }
+
+.news-container {
+  margin-bottom: 120px;
+}
