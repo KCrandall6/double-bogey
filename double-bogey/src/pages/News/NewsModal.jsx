@@ -4,16 +4,19 @@ import { Modal, Button} from 'react-bootstrap';
 const NewsModal = ({url, formatTimestamp}) => {
 
   const [show, setShow] = useState(false);
+  const [content, setContent] = useState({})
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
-  const [content, setContent] = useState({})
   useEffect(() => {
-    fetch(url.href)
-    .then((res) => res.json())
-    .then((res) => setContent(res))
-  }, [url])
+    const updatedUrl = new URL(url.href);
+    updatedUrl.protocol = 'https';
+
+    fetch(updatedUrl.href)
+      .then((res) => res.json())
+      .then((res) => setContent(res));
+  }, [url]);
 
   return (
     <>
