@@ -7,7 +7,6 @@ const News = () => {
 
   const [articles, setArticles] = useState([]);
   const today = new Date();
-  console.log('today', today)
 
   useEffect(() => {
     fetch('https://site.api.espn.com/apis/site/v2/sports/golf/pga/news')
