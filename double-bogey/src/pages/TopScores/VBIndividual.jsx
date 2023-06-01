@@ -1,12 +1,18 @@
 import React from 'react';
-import { Row } from 'react-bootstrap';
 
-const VBIndividual = ({person}) => {
+const VBIndividual = ({person, formatTimestamp}) => {
 
   return (
-    <div>
-      <Row>{person.player}</Row>
-    </div>
+    <>
+    <tbody>
+          <tr>
+            <th>{person.player}</th>
+            <th>{person.course}</th>
+            <th>{person.total}</th>
+            <th>{formatTimestamp(person.date)}</th>
+          </tr>
+        </tbody>
+    </>
   )
 };
 

@@ -1,5 +1,5 @@
 import React, { useState, useEffect} from 'react';
-import {Button} from 'react-bootstrap';
+import {Button, Table} from 'react-bootstrap';
 
 import {endpoint} from '../../configEndpoint';
 import VBScorecard from './VBScorecard';
@@ -38,8 +38,6 @@ const TopScores = () => {
     });
   }, []);
 
-  console.log('scores', groupedScores)
-
   const changeViewBy = () => {
     setVbInd(!vbInd);
   };
@@ -64,9 +62,21 @@ const TopScores = () => {
       <Button onClick={() => changeViewBy()} style={{ color:"white", backgroundColor: "#395144", border: "none"}}>View by</Button>
       <div className="mobile-container">
         {vbInd === true ? (
-          scores.map((person, index) => (
-            <VBIndividual key={index + 1} person={person} formatTimestamp={formatTimestamp}/>
-          ))
+          <div className='mt-4 m-2'>
+            <Table className="align-middle" striped hover bordered responsive style={{backgroundColor: "white", border: "2px solid #395144",}}>
+              <thead style={{fontSize: '23px'}}>
+                <tr className="align-middle">
+                  <th>Name</th>
+                  <th>Course</th>
+                  <th>Total Score</th>
+                  <th>Date</th>
+                </tr>
+              </thead>
+              {scores.map((person, index) => (
+                <VBIndividual key={index + 1} person={person} formatTimestamp={formatTimestamp}/>
+              ))}
+            </Table>
+          </div>
         ) : (
           groupedScores.map((group, index) => (
             <VBScorecard key={index + 1} group={group} formatTimestamp={formatTimestamp}/>
