@@ -63,12 +63,13 @@ const TopScores = () => {
       <div className="mobile-container">
         {vbInd === true ? (
           <div className='mt-4 m-2'>
-            <Table className="align-middle" striped hover bordered responsive style={{backgroundColor: "white", border: "2px solid #395144",}}>
-              <thead style={{fontSize: '23px'}}>
-                <tr className="align-middle">
+            <Table className="align-middle" striped hover bordered responsive="sm" style={{backgroundColor: "white", border: "2px solid #395144", width: "100%"}}>
+              <thead>
+                <tr className="align-middle" style={{fontSize: '23px'}}>
                   <th>Name</th>
                   <th>Course</th>
                   <th>Total Score</th>
+                  <th>Score (no handicap)</th>
                   <th>Date</th>
                 </tr>
               </thead>

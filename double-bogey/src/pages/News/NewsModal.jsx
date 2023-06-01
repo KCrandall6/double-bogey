@@ -20,7 +20,7 @@ const NewsModal = ({url, formatTimestamp}) => {
 
   return (
     <>
-      <Button onClick={() => handleShow()} style={{ color:"white", backgroundColor: "#395144", border: "none"}}>Read More...</Button>
+      <Button onClick={() => handleShow()} style={{ color:"white", backgroundColor: "#395144", border: "none"}}>See More...</Button>
       {url.href[7] === "n" ? (
         <Modal show={show} onHide={handleClose} fullscreen={true}>
         <Modal.Header closeButton>
