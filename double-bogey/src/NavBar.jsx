@@ -84,7 +84,7 @@ function NavBar() {
                 <Nav className="justify-content-center fs-4">
                   <NavLink className="nav-link-spacing" href="/">Home</NavLink>
                   <NavLink className="nav-link-spacing" href="/">Scorecard</NavLink>
-                  <NavLink className="nav-link-spacing" href="/courseOverview">Courses</NavLink>
+                  <NavLink className="nav-link-spacing" href="/news">News</NavLink>
                   <NavLink className="nav-link-spacing" href="/topScores">Top Scores</NavLink>
                   <NavLink className="nav-link-spacing" href="/myprofile">My Profile</NavLink>
                 </Nav>
