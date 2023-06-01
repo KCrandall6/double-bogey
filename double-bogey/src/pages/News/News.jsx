@@ -21,7 +21,7 @@ const News = () => {
   };
 
   return (
-    <div className="news-container">
+    <div className="mobile-container">
       <div className="d-flex flex-column align-items-center justify-content-center text-center pt-3">
         <h1>Latest Golf News</h1>
         <h4>{formatTimestamp(today)}</h4>

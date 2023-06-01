@@ -64,6 +64,12 @@ body {
 font-family: cursive;
 }
 
-.news-container {
+.mobile-container {
   margin-bottom: 120px;
+}
+
+.table-scores {
+  margin-bottom: 0%;
+  margin-right: 15px;
+  font-size: 18px;
 }
