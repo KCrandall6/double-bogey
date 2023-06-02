@@ -1,6 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import { Button, Form, Modal } from 'react-bootstrap';
+import { Button } from 'react-bootstrap';
 import Scorecard from './Scorecard';
+import NewScorecard from './Modals/NewScorecard';
+import RecentScorecard from './RecentScorecard';
+import RecentNews from './RecentNews';
 import { endpoint } from '../../configEndpoint';
 
 const Home = () => {
@@ -15,6 +18,8 @@ const Home = () => {
   });
   const [scorecard, setScorecard] = useState([]);
   const [show, setShow] = useState(false);
+  const [recentCard, setRecentCard] = useState([]);
+  const [articles, setArticles] = useState([]);
 
   // check if a game is already in progress
   useEffect(() => {
@@ -27,12 +32,38 @@ const Home = () => {
         setScorecard(parsedScorecard);
         setCourse(parsedCourse);
         setExistingGame(true);
+      } else {
+        fetchRecentScorecard();
+        fetchRecentNews();
       }
     } catch (error) {
       console.error('Error parsing scorecard data:', error);
     }
   }, []);
 
+  const fetchRecentScorecard = () => {
+    fetch(`${endpoint}/.netlify/functions/homeRecentScorecard`)
+    .then((res) => res.json())
+    .then((res) => setRecentCard(res));
+  }
+
+  const fetchRecentNews = () => {
+    fetch('https://site.api.espn.com/apis/site/v2/sports/golf/pga/news')
+    .then((res) => res.json())
+    .then((res) => setArticles(res.articles))
+  }
+
+  const formatTimestamp = (timestamp) => {
+    const dateStartIndex = timestamp.indexOf('"') + 1;
+    const dateEndIndex = timestamp.lastIndexOf('"');
+    const dateString = timestamp.substring(dateStartIndex, dateEndIndex);
+    const date = new Date(dateString);
+    if (!isNaN(date.getTime())) {
+      const options = { year: 'numeric', month: 'long', day: 'numeric' };
+      return date.toLocaleDateString('en-US', options);
+    }
+    return 'Invalid Date';
+  };
 
   const startNewGame = async (selectedCourse) => {
     await fetch(`${endpoint}/.netlify/functions/getCourseInfo?course=${selectedCourse}`)
@@ -52,8 +83,6 @@ const Home = () => {
         handleClose();
       });
   };
-  
-    
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
@@ -65,37 +94,33 @@ const Home = () => {
           <Scorecard course={course} scorecard={scorecard} setScorecard={setScorecard} setExistingGame={setExistingGame}/>
         </div>
       ) : (
-        <div className='d-flex justify-content-center mt-5 pt-5'>
-          <Button size="lg" onClick={handleShow} style={{ color:"white", backgroundColor: "#395144", border: "none"}}>
-            New Scorecard
-          </Button>
-
-          <Modal className="mt-5" show={show} onHide={handleClose}>
-        <Modal.Header closeButton>
-          <Modal.Title>Create a New Scorecard</Modal.Title>
-        </Modal.Header>
-        <Modal.Body>
-          <Form className="text-center">
-              <p className="m-3"><em>To create a new scorecard, select a course from the menu</em></p>
-            <Form.Select value={course.courseName} onChange={(e) => setCourse({ ...course, courseName: e.target.value })}>
-              <option disabled value="">select a course</option>
-              <option value="Royal Palms">Royal Palms</option>
-              <option value="Longbow">Longbow</option>
-              <option value="Painted Mountain">Painted Mountain</option>
-              <option value="Apache Wells">Apache Wells</option>
-            </Form.Select>
-          </Form>
-        </Modal.Body>
-        <Modal.Footer className="d-flex justify-content-center">
-          <Button size="lg" variant="secondary" onClick={handleClose}>
-            Close
-          </Button>
-          <Button size="lg" style={{ color:"white", backgroundColor: "#395144", border: "none"}} onClick={() => startNewGame(course.courseName)}>
-            Create New Game
-          </Button>
-        </Modal.Footer>
-      </Modal>
-        </div>
+        <>
+          <div className='d-flex text-center justify-content-center mt-4 me-5 ms-5'>
+            <h3>To start a new scorecard, click the button below</h3>
+          </div>
+          <div className='d-flex text-center justify-content-center'>
+            <Button size="lg" onClick={handleShow} style={{ color:"white", backgroundColor: "#395144", border: "none"}}>
+              New Scorecard
+            </Button>
+            <NewScorecard show={show} handleClose={handleClose} course={course} setCourse={setCourse} startNewGame={startNewGame}/>
+          </div>
+          <div className="d-flex flex-column mt-3 m-2 text-center">
+            <h5 className='mt-4'>Check who has been golfing recently?</h5>
+            {recentCard.length > 0 && (
+              <RecentScorecard recentCard={recentCard} formatTimestamp={formatTimestamp} />
+            )}
+            <h6>Click to see more scores!</h6>
+          </div>
+          <div className="mobile-container">
+            <div className="d-flex flex-column mt-3 m-2 text-center">
+              <h5 className='mt-4'>Check out the latest golf news</h5>
+              {RecentNews.length > 0 && (
+                <RecentNews articles={articles}/>
+              )}
+              <h6 className='mt-4'>Click to see more news!</h6>
+            </div>
+          </div>
+        </>
       )}
     </>
   )
