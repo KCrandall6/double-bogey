@@ -3,12 +3,11 @@
 
 import React, { useState } from 'react';
 import {Button, Modal, Form} from 'react-bootstrap';
-import {endpoint} from '../../../configEndpoint';
+import SaveGameModal from './SaveGameModal';
 
-const AreYouSure = ({show, setShow, handleClose, handleShow, confirmModal, addPlayer, deleteLastPlayer, restartNewGame, scorecard}) => {
+const AreYouSure = ({show, handleClose, confirmModal, addPlayer, deleteLastPlayer, restartNewGame, scorecard}) => {
 
   const [playerName, setPlayerName] = useState('');
-  const [password, setPassword] = useState('');
 
   const handlePlayerNameChange = (event) => {
     setPlayerName(event.target.value);
@@ -18,36 +17,6 @@ const AreYouSure = ({show, setShow, handleClose, handleShow, confirmModal, addPl
     addPlayer(playerName);
     handleClose();
     setPlayerName('');
-  };
-
-  const saveGame = async () => {
-    const correctPassword = process.env.REACT_APP_SAVE_PW;
-    if (password === correctPassword) {
-      try {
-        await Promise.all(
-          scorecard.map(async (player) => {
-            // Post player to the database
-            const response = await fetch(`${endpoint}/.netlify/functions/addNewGame`, {
-              method: 'POST',
-              body: JSON.stringify(player),
-              headers: {
-                'Content-Type': 'application/json',
-              },
-            });
-  
-            if (!response.ok) {
-              throw new Error('Failed to save player: ' + player.name);
-            }
-          })
-        );
-  
-        restartNewGame();
-      } catch (error) {
-        console.log('Error saving game:', error);
-      }
-    } else {
-      console.log('Incorrect password');
-    }
   };
 
   if (confirmModal === 'add player') {
@@ -121,33 +90,7 @@ const AreYouSure = ({show, setShow, handleClose, handleShow, confirmModal, addPl
   } else if (confirmModal === 'save game') {
     return (
       <>
-        <Modal show={show} onHide={handleClose}>
-          <Modal.Header closeButton>
-            <Modal.Title>Save Game</Modal.Title>
-          </Modal.Header>
-          <Modal.Body className="text-center">
-            Are you ready to save your game?
-            <Form>
-              <Form.Group className="mb-3" controlId="formBasicPassword">
-                <Form.Label>Please enter the Password</Form.Label>
-                <Form.Control
-                  type="password"
-                  placeholder="Password"
-                  value={password}
-                  onChange={(e) => setPassword(e.target.value)}
-                />
-              </Form.Group>
-            </Form>
-          </Modal.Body>
-          <Modal.Footer className="d-flex justify-content-center">
-            <Button size="lg" variant="secondary" onClick={handleClose}>
-              Close
-            </Button>
-            <Button size="lg" style={{ color:"white", backgroundColor: "#4E6C50", border: "none"}} onClick={() => saveGame()}>
-              Save Game
-            </Button>
-          </Modal.Footer>
-        </Modal>
+        <SaveGameModal show={show} handleClose={handleClose} scorecard={scorecard} restartNewGame={restartNewGame} />
       </>
     );
   }

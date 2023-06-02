@@ -1,6 +1,16 @@
+import React, {useState, useEffect} from 'react';
 import {Modal, Form, Button} from 'react-bootstrap';
+import { endpoint } from '../../../configEndpoint';
 
 const NewScorecard = ({show, handleClose, course, setCourse, startNewGame}) => {
+
+  const [courseOptions, setCourseOptions] = useState([]);
+
+  useEffect(() => {
+    fetch(`${endpoint}/.netlify/functions/getCourseNames`)
+    .then((res) => res.json())
+    .then((res) => setCourseOptions(res));
+  }, []);
 
   return (
     <>
@@ -13,10 +23,11 @@ const NewScorecard = ({show, handleClose, course, setCourse, startNewGame}) => {
               <p className="m-3"><em>To create a new scorecard, select a course from the menu</em></p>
             <Form.Select value={course.courseName} onChange={(e) => setCourse({ ...course, courseName: e.target.value })}>
               <option disabled value="">select a course</option>
-              <option value="Royal Palms">Royal Palms</option>
-              <option value="Longbow">Longbow</option>
-              <option value="Painted Mountain">Painted Mountain</option>
-              <option value="Apache Wells">Apache Wells</option>
+              {courseOptions.length > 0 && (
+                courseOptions.map((name, index) => (
+                  <option key={index + 1} value={name.courseName}>{name.courseName}</option>
+                ))
+              )}
             </Form.Select>
           </Form>
         </Modal.Body>
