@@ -79,3 +79,26 @@ font-family: cursive;
   margin-right: 15px;
   font-size: 12px;
 }
+
+@media (min-width: 768px) {
+  .legend-container {
+    position: absolute;
+    top: 127px;
+    right: 300px;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    padding: 3px;
+    z-index: 1000;
+    font-size: 13px;
+    width: 80px;
+  }
+}
+
+@media (max-width: 767px) {
+  .legend-container {
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+    align-items: center;
+  }
+}
