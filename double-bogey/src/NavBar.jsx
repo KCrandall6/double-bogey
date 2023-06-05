@@ -39,7 +39,7 @@ function NavBar() {
                 <Nav className="text-center dropdown-options">
                   <NavItem>
                     <NavLink href="/myprofile">My Profile</NavLink>
-                    <NavLink href="/courseOverview">Coure Information</NavLink>
+                    <NavLink href="/courseOverview">Course Information</NavLink>
                     <NavLink href="/share">Share</NavLink>
                   </NavItem>
                 </Nav>
