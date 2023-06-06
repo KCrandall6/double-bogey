@@ -28,9 +28,10 @@ const NewsModal = ({url, formatTimestamp}) => {
             {content.headlines && content.headlines.length > 0 ? (
               <>
                 <Modal.Title>{content.headlines[0].title}</Modal.Title>
-                <div className="d-flex flex-row justify-content-around">
-                  <p className=""><em>~ by {content.headlines[0].source} ~</em></p>
-                  <p className=""><em>~ {formatTimestamp(content.timestamp)} ~</em></p>
+                <div className="d-flex flex-column justify-content-around">
+                  <h6 className=""><em>{content.headlines[0].source}</em></h6>
+                  <h6 className=""><em>by {content.headlines[0].byline}</em></h6>
+                  <h6 className=""><em>{formatTimestamp(content.timestamp)}</em></h6>
                 </div>
               </>
             ) : (
