@@ -15,14 +15,14 @@ const VBScorecard = ({group, formatTimestamp}) => {
   })
 
   return (
-    <div className='m-2 mt-3' style={{maxWidth: "700px"}}>
+    <div className='m-2 mt-3' style={{maxWidth: "700px",}}>
       <div className='d-flex justify-content-start'>
         <p className='table-scores'><em><b>Course: </b></em>{group[0].course}</p>
         <p className='table-scores'><em><b>Date: </b></em>{formatTimestamp(group[0].date)}</p>
         <p className='table-scores'><em><b>Course Par: </b></em>{coursePar}</p>
       </div>
-      <Table className="align-middle" striped hover bordered responsive style={{backgroundColor: "white", border: "2px solid #395144",}}>
-        <thead className="align-middle" style={{fontSize: '20px' }}>
+      <Table className="align-middle" striped hover bordered responsive style={{backgroundColor: "white", border: "2px solid #395144", fontSize: '12px'}}>
+        <thead className="align-middle" style={{fontSize: '16px' }}>
           <tr>
             <th>Name</th>
             <th>Total Score</th>

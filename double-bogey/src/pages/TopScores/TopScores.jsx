@@ -123,7 +123,7 @@ const TopScores = () => {
           <div className='mt-4 m-2'>
             <Table className="align-middle mx-auto" striped hover bordered responsive="sm" style={{backgroundColor: "white", border: "2px solid #395144", overflowX: 'auto', maxWidth: "700px"}}>
               <thead>
-                <tr className="align-middle" style={{fontSize: '23px'}}>
+                <tr className="align-middle" style={{fontSize: '16px'}}>
                   <th>Name</th>
                   <th>Course</th>
                   <th>Total Score</th>

@@ -15,7 +15,7 @@ const VBIndividual = ({person, formatTimestamp}) => {
 
   return (
     <>
-    <tbody>
+    <tbody style={{fontSize: '12px'}}>
           <tr>
             <th>{person.player}</th>
             <th>{person.course}</th>

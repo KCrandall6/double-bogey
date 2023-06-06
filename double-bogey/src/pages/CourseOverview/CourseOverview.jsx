@@ -26,12 +26,24 @@ const CourseOverview = () => {
     iconAnchor: [12, 38],
   });
 
-  console.log('cour', courses)
-
   return (
     <div className="mobile-container">
       <div className="d-flex flex-column m-2 text-center align-items-center">
         <h1>Courses</h1>
+        <div className="d-flex align-items-center m-2 p-2 border bg-light">
+          <img
+          alt="golf"
+          src={golfPin}
+          width="25"
+          />
+          <h5 className='ms-1 me-3'>Golf</h5>
+          <img
+          alt="golf"
+          src={miniGolfPin}
+          width="25"
+          />
+          <h5 className='ms-1 me-3'>Mini-Golf</h5>
+        </div>
         <MapContainer
           style={{ height: "400px", width: "100%", maxWidth: "700px", border: "1px solid black" }}
           center={[33.4, -111.75]}
@@ -61,38 +73,6 @@ const CourseOverview = () => {
               </Marker>
             ))}
         </MapContainer>
-        <div
-        style={{
-          position: 'absolute',
-          top: '120px',
-          right: '14px',
-          backgroundColor: '#fff',
-          border: '1px solid #ccc',
-          padding: '3px',
-          zIndex: 1000,
-          fontSize: "13px"
-        }}
-      >
-        {/* Legend content */}
-        <div className="legend-container">
-            <div className='d-flex flex-row'>
-              <img
-              src={golfPin}
-              height="20px"
-              alt='golf'
-              />
-              <p >Golf</p>
-            </div>
-            <div className='d-flex flex-row'>
-              <img
-              src={miniGolfPin}
-              height="20px"
-              alt='golf'
-              />
-              <p >Mini Golf</p>
-            </div>
-        </div>
-      </div>
       </div>
     </div>
   );
