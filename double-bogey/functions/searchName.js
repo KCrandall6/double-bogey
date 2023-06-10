@@ -7,7 +7,7 @@ exports.handler = async function (event, context) {
     const { name } = event.queryStringParameters;
 
     // Execute your database query
-    const searchQuery = `SELECT * FROM "public.Games" WHERE "player" = '${name}'`;
+    const searchQuery = `SELECT * FROM "public.Games" WHERE "player" LIKE '%${name}%'`;
     const data = await db.query(searchQuery);
 
     // Return the response
