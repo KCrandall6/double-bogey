@@ -1,6 +1,7 @@
 import React from 'react';
 import {Button} from 'react-bootstrap';
 import ProfileStats from './Components/ProfileStats';
+import ProfileGraph from './Components/ProfileGraph';
 
 const Profile = ({person, soloGames, teamGames, clearPlayer}) => {
 
@@ -15,6 +16,7 @@ const Profile = ({person, soloGames, teamGames, clearPlayer}) => {
         <Button size="sm" style={{ color:"white", backgroundColor: "#AA9B56", border: "none"}} onClick={() => clearPlayer()}>Reset Player</Button>
       </div>
         <ProfileStats person={person} soloGames={soloGames} teamGames={teamGames}/>
+        <ProfileGraph soloGames={soloGames} teamGames={teamGames}/>
     </div>
   )
 };

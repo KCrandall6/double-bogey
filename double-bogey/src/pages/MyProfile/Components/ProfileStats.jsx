@@ -36,8 +36,8 @@ const ProfileStats = ({person, soloGames, teamGames}) => {
   return (
     <>
       <Container className='d-flex flex-column text-center justify-content-center mt-2'>
-        <h1 className="m-2">Analyze Your Profile</h1>
-          <h2 className="m-2"><u>{person}</u></h2>
+        {/* <h1 className="m-2">Analyze Your Profile</h1> */}
+          <h1 className="m-2"><u>{person}</u></h1>
           <Row className="">
             <Col>
               <h5><b>Total Games</b></h5>
